@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
 	pageEncoding="BIG5"%>
+<%@ page import="loginFunc.LoginFunc" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,20 +71,22 @@ input {
 	height: 50px;
 }
 
-.btnUnderline {
-	text-decoration: underline;
-	background-color: transparent;
-	border: none;
-	color: #5c1700;
-	font-weight: 300;
-	font-size: larger;
-	font-family: 'Poppins', 'Trebuchet MS', fantasy, 'Times New Roman';
-	font-variation-settings: 'wght' 700, 'slnt' 0;
+.btnDown{
+    background-color: transparent;
+    border: none;
+    color: #5c1700;
+    font-weight:300;
+    font-size:larger;  
+    font-family:'Poppins','Trebuchet MS', fantasy, 'Times New Roman';
+    font-variation-settings: 'wght' 700, 'slnt' 0;
 }
-
-button:hover {
-	background-color: #67412e;
-	color: rgb(219, 204, 204);
+.btnDown:hover{
+    color: #956a6a; 
+    background-color: transparent;
+}
+button:hover{
+   background-color:#67412e;
+    color: rgb(219, 204, 204); 
 }
 </style>
 </head>
@@ -96,21 +99,41 @@ button:hover {
 		<br></br> <br></br>
 		<p>
 			<span class="word">Account：</span> <input type="text"
-				name="txtAccount">
+				name="txtAccount" id = "nameBox">
 		</p>
 		<br></br>
 		<p>
 			<span class="word">Password：</span> <input type="password"
-				name="pwAccount">
+				name="pwAccount" id = "pwBox">
 		</p>
 		<br></br> <br>
 		<button type="button" class="word btnSubmit">Sign in</button>
 		<br></br>
-		<button type="button" class="btnUnderline word">Forgot
+		<button type="button" class="btnDown word">Forgot
 			password?</button>
 		<br></br>
-		<button type="button" class="btnUnderline word">Don't have an
-			account?</button>
+		<button type="button" class="btnDown word" id = "signUp">Don't have an account?</button>
 	</div>
+	
+	<script type="text/javascript">
+	var btnSignIn = document.getElementById("signIn");
+	btnSignUp.addEventListener("click", function(){
+		var inputName = document.getElementById("nameBox").value;
+		var inputPW = document.getElementById("pwBox").value;
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", "LoginServlet?inputName=" + inputName, true);
+		xhr.send();
+		<%
+				LoginFunc func = new LoginFunc();
+				func.btnRegister(inputName, inputPW);
+		%>
+	    //window.location.href = "main.jsp";   (連接到主頁)
+	})
+	var btnSignUp = document.getElementById("signUp");
+	btnSignUp.addEventListener("click", function(){
+	    window.location.href = "register.jsp";
+	})
+	</script>
+	
 </body>
 </html>

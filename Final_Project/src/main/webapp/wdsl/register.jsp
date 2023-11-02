@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="BIG5">
-<title>Insert title here</title>
+<title>Register page</title>
 <style>
 body{
     width: 100%;
