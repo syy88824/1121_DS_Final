@@ -50,10 +50,6 @@ body {
 	font-variation-settings: 'wght' 700, 'slnt' 0;
 }
 
-#smallWord {
-	font-size: x-large;
-}
-
 input {
 	border-color: #5c1700;
 	border-width: 3px;
