@@ -1,3 +1,5 @@
+package wordCounter;
+
 import java.io.IOException;
 import java.util.Scanner;
 
