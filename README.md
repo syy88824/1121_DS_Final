@@ -28,11 +28,7 @@ button type="submit"
 ### SearchResult.jsp
 Element：
 1. 搜索bar (讓user仍可於SearchResult頁面中重新搜尋)
-2. 搜索結果(劇名)
-> 看能不能點劇名之後連結弄到那部劇的維基或其他頁面
-3. (如果還有時間的話)該劇的照片 (看要當劇名後面的背景還是放在劇名旁邊)
+2. 結果網址
 
 ## 跟老師的code比起來可以改的東西
-* 將quickSort換成time complexity更小的演算法 (quickSort O=nlog(n))
-* 僅擷取網頁中一部份的資料(不是放上整個網頁的網址，而是只放上劇名)
-* (如果還有餘力) 抓取該劇的照片並呈現於網頁中
+* 將quickSort換成更佳的演算法 (例如in-place quick sort(?))
