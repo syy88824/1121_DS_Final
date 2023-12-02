@@ -1,3 +1,5 @@
+package nodeCountScore;
+
 import java.util.*;
 public class KeywordList {	
 	private LinkedList<Keyword> lst;
