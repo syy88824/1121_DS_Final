@@ -15,6 +15,8 @@
 > 路徑：Project/src/main/webapp (可在webapp中再建資料夾)
 > 
 > 目前研究到的是css檔一定要放在jsp裡面(無法外嵌)，javascript還不確定
+>
+> 可以先在vscode把html/css/javascript寫好以後再複製到java的jsp檔
 ### Browser.jsp
 Element：
 1. 搜索bar (html tag = input) 
