@@ -7,6 +7,7 @@ public class WebPage {
 	public String url;
 	public String name;
 	public WordCounter counter;
+	public KeywordList keys = new KeywordList();
 	public double score;
 	
 	public WebPage(String url, String name){
@@ -15,11 +16,12 @@ public class WebPage {
 		this.counter = new WordCounter(url);	
 	}
 	
-	public void setScore(ArrayList<Keyword> keywords) throws IOException{
-		score = 0;
+	public void setScore() throws IOException{
+		ArrayList<webScore.Keyword> keywords = keys.getList();
 //		1. calculate score
 		for(Keyword k : keywords){		
-			score += k.weight * counter.countKeyword(k.name);	
+			k.setCount(counter.countKeyword(k.name));
+			score += k.weight * k.count;
 		}
 	}	
 }

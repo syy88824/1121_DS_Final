@@ -1,4 +1,4 @@
-package quickSort;
+/*package quickSort;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,4 +36,4 @@ public class Main {
 		}
 		scanner.close();
 	}
-}
+}*/
