@@ -16,7 +16,7 @@ public class Main
 			 * 6,7:Tissue
 			 * 8,9:Process
 			 */
-			System.out.println(new GoogleQuery("Tomato").query());
+			System.out.println(new GoogleQuery("韓劇").query());
 //			GoogleQuery g = new GoogleQuery("NCCU");
 //			g.query();
 		} 

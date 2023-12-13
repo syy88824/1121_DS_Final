@@ -86,11 +86,53 @@ public class GoogleQuery
 				//put title and pair into HashMap
 				retVal.put(title, citeUrl);
 
+				crawlSubpages(citeUrl, retVal);
+				
 			} catch (IndexOutOfBoundsException e) 
 			{
 //				e.printStackTrace();
 			}
 		}
 		return retVal;
+	}
+	
+	//加入爬子網頁的method
+	private void crawlSubpages(String url, HashMap<String, String> retVal) {
+	    try {
+	        
+	        String realUrl = extractRealUrl(url);
+
+	        Document subPageDoc = Jsoup.connect(realUrl).get();
+
+	        
+	        String subPageTitle = subPageDoc.title();
+	        System.out.println("子網頁標題: " + subPageTitle);
+
+	        
+	        Elements paragraphs = subPageDoc.select("p");
+	        StringBuilder subPageContent = new StringBuilder();
+	        for (Element paragraph : paragraphs) {
+	            subPageContent.append(paragraph.text()).append("\n");
+	        }
+	        System.out.println("子網頁內容:\n" + subPageContent);
+
+	        
+	        retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	//解析 Google 搜尋结果的連結，獲取其中真實的 URL
+	private String extractRealUrl(String googleUrl) {
+	    
+	    int startIndex = googleUrl.indexOf("/url?q=") + 7;
+	    int endIndex = googleUrl.indexOf("&sa=");
+	    if (startIndex != -1 && endIndex != -1) {
+	        return googleUrl.substring(startIndex, endIndex);
+	    } else {
+	        
+	        return googleUrl;
+	    }
 	}
 }
