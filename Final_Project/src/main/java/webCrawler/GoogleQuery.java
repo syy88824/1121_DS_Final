@@ -13,6 +13,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+// import在webscore這個package的webnode和webpage
+import webScore.WebNode;
+import webScore.WebPage;
+
 public class GoogleQuery 
 {
 	public String searchKeyword;
@@ -86,6 +90,14 @@ public class GoogleQuery
 				//put title and pair into HashMap
 				retVal.put(title, citeUrl);
 
+
+				// Create a WebPage instance for the current result
+                WebPage webPage = new WebPage(title, citeUrl);
+
+                // Add the WebPage instance to the WebNode
+                WebNode webNode = new WebNode(webPage);
+
+
 				crawlSubpages(citeUrl, retVal);
 				
 			} catch (IndexOutOfBoundsException e) 
@@ -116,8 +128,22 @@ public class GoogleQuery
 	        }
 	        System.out.println("子網頁內容:\n" + subPageContent);
 
+
+			// Create a WebPage instance for the subpage
+            WebPage subPage = new WebPage("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
+
+            // Create a WebNode instance for the subpage
+            WebNode subNode = new WebNode(subPage);
+
+            // Add the subNode to the parentNode's children
+            parentNode.addChild(subNode);
+
+            // Recursively crawl subpages for the subNode
+            crawlSubpages(realUrl, subNode);
+			
 	        
-	        retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
+	        //retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
+
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
