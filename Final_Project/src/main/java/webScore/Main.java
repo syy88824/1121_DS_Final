@@ -3,6 +3,8 @@ package webScore;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 //import javax.net.ssl.HostnameVerifier;
 //import javax.net.ssl.HttpsURLConnection;
 //import javax.net.ssl.SSLSession;
@@ -21,6 +23,12 @@ public class Main {
 		tree.root.addChild(new WebNode(new WebPage("https://www.litv.tv/vod/drama/list.do?category_id=53&page=1","Taiwan")));
 		tree.root.addChild(new WebNode(new WebPage("https://www.litv.tv/vod/drama/list.do?category_id=530&page=1","Korea")));
 		tree.root.addChild(new WebNode(new WebPage("https://www.litv.tv/vod/drama/list.do?category_id=54&page=1", "Japan")));
+		
+		// Iterate through each child node and crawl its subpages
+        for (WebNode childNode : tree.root.children) {
+            crawlSubpages(childNode);
+        }
+
 		
 		/*tree.root.addChild(new WebNode(new WebPage("http://soslab.nccu.edu.tw/Publications.html","Publication")));
 		tree.root.addChild(new WebNode(new WebPage("http://soslab.nccu.edu.tw/Projects.html","Projects")));
@@ -52,8 +60,27 @@ public class Main {
 			tree.setPostOrderScore();
 			tree.eularPrintTree();
 			
+			
+			
 		}
-		
+	private static void crawlSubpages(WebNode parentNode) {
+        try {
+            String url = parentNode.webPage.url;
+            HashMap<String, String> subpages = new webCrawler.GoogleQuery(url).query();
+
+            // Create WebNode for each subpage and add to the children list of parentNode
+            for (Map.Entry<String, String> entry : subpages.entrySet()) {
+                String subpageTitle = entry.getKey();
+                String subpageUrl = entry.getValue();
+
+                WebPage subpage = new WebPage(subpageUrl, subpageTitle);
+                WebNode subpageNode = new WebNode(subpage);
+                parentNode.addChild(subpageNode);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 	
 	
