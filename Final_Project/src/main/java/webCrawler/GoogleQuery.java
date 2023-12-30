@@ -50,14 +50,14 @@ public class GoogleQuery
 		return retVal;
 	}
 	
-	public HashMap<String, String> query() throws IOException
+	public void query() throws IOException
 	{
 		if(content == null)
 		{
 			content = fetchContent();
 		}
 
-		HashMap<String, String> retVal = new HashMap<String, String>();
+		//HashMap<String, String> retVal = new HashMap<String, String>();
 		
 		
 		/* 
@@ -88,7 +88,7 @@ public class GoogleQuery
 				System.out.println("Title: "+title + " , url: " + citeUrl);
 				
 				//put title and pair into HashMap
-				retVal.put(title, citeUrl);
+				//retVal.put(title, citeUrl);
 
 
 				// Create a WebPage instance for the current result
@@ -98,7 +98,7 @@ public class GoogleQuery
                 WebNode webNode = new WebNode(webPage);
 
 
-				crawlSubpages(citeUrl, retVal);
+				crawlSubpages(citeUrl, webNode);
 				
 			} catch (IndexOutOfBoundsException e) 
 			{
