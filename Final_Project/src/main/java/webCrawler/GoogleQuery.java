@@ -86,6 +86,11 @@ public class GoogleQuery
 				//put title and pair into HashMap
 				retVal.put(title, citeUrl);
 
+<<<<<<< Updated upstream
+=======
+				crawlSubpages(citeUrl, retVal);
+				
+>>>>>>> Stashed changes
 			} catch (IndexOutOfBoundsException e) 
 			{
 //				e.printStackTrace();
@@ -116,6 +121,7 @@ public class GoogleQuery
 	        }
 	        System.out.println("子網頁內容:\n" + subPageContent);
 
+<<<<<<< Updated upstream
 
 			// Create a WebPage instance for the subpage
             WebPage subPage = new WebPage("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
@@ -132,9 +138,10 @@ public class GoogleQuery
             map.put(subPageTitle, realUrl);
             crawlSubpages(realUrl, map);
 			
+=======
+>>>>>>> Stashed changes
 	        
-	        //retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
-
+	        retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
@@ -152,5 +159,9 @@ public class GoogleQuery
 	        return googleUrl;
 	    }
 	}
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 }
+=======
+}
+>>>>>>> Stashed changes
