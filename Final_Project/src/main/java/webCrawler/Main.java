@@ -17,17 +17,11 @@ public class Main
 			 * 8,9:Process
 <<<<<<< Updated upstream
 			 */
-			System.out.println(new GoogleQuery("韓劇").query());
-=======
-<<<<<<< Updated upstream
+			System.out.println(new GoogleQuery("台北").query());
 			 
-			System.out.println(new GoogleQuery("Tomato").query());
-=======
-			 *
+			//System.out.println(new GoogleQuery("Tomato").query());
 			
 			//System.out.println(new GoogleQuery(search).query());
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 //			GoogleQuery g = new GoogleQuery("NCCU");
 //			g.query();
 		} 
