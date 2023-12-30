@@ -109,7 +109,7 @@ public class GoogleQuery
 	}
 	
 	//加入爬子網頁的method
-	private void crawlSubpages(String url, HashMap<String, String> retVal) {
+	private void crawlSubpages(String url, WebNode parentNode) {
 	    try {
 	        
 	        String realUrl = extractRealUrl(url);
@@ -140,7 +140,7 @@ public class GoogleQuery
 
             // Recursively crawl subpages for the subNode
             crawlSubpages(realUrl, subNode);
-			
+
 	        
 	        //retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
 
