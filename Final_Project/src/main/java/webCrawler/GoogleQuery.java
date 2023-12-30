@@ -19,7 +19,7 @@ public class GoogleQuery
 	public String url;
 	public String content;
 	
-	public GoogleQuery(String searchKeyword)
+	public GoogleQuery(String searchKeyword) throws IOException
 	{
 		this.searchKeyword = searchKeyword;
 		this.url = "http://www.google.com/search?q="+searchKeyword+"&oe=utf8&num=20";
@@ -93,4 +93,64 @@ public class GoogleQuery
 		}
 		return retVal;
 	}
+<<<<<<< Updated upstream
+=======
+	
+	//加入爬子網頁的method
+	private void crawlSubpages(String url, HashMap<String, String> retVal) {
+	    try {
+	        
+	        String realUrl = extractRealUrl(url);
+
+	        Document subPageDoc = Jsoup.connect(realUrl).get();
+
+	        
+	        String subPageTitle = subPageDoc.title();
+	        System.out.println("子網頁標題: " + subPageTitle);
+
+	        
+	        Elements paragraphs = subPageDoc.select("p");
+	        StringBuilder subPageContent = new StringBuilder();
+	        for (Element paragraph : paragraphs) {
+	            subPageContent.append(paragraph.text()).append("\n");
+	        }
+	        System.out.println("子網頁內容:\n" + subPageContent);
+
+
+			// Create a WebPage instance for the subpage
+            WebPage subPage = new WebPage("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
+
+            // Create a WebNode instance for the subpage
+            WebNode subNode = new WebNode(subPage);
+            
+            // Add the subNode to the parentNode's children
+            subNode.parent.addChild(subNode);
+
+            // Recursively crawl subpages for the subNode
+            //crawlSubpages(realUrl, subNode);
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put(subPageTitle, realUrl);
+            crawlSubpages(realUrl, map);
+			
+	        
+	        //retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	//解析 Google 搜尋结果的連結，獲取其中真實的 URL
+	private String extractRealUrl(String googleUrl) {
+	    
+	    int startIndex = googleUrl.indexOf("/url?q=") + 7;
+	    int endIndex = googleUrl.indexOf("&sa=");
+	    if (startIndex != -1 && endIndex != -1) {
+	        return googleUrl.substring(startIndex, endIndex);
+	    } else {
+	        
+	        return googleUrl;
+	    }
+	}
+>>>>>>> Stashed changes
 }

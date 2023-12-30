@@ -1,12 +1,27 @@
 package webCrawler;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main 
 {
+	//static String search = "";
+	
+	public static void setSearch(String search) {
+		//Main.search = search;
+		try {
+			System.out.println(new GoogleQuery(search).query());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) 
 	{
-		try 
+		Scanner sc = new Scanner(System.in);
+		Main.setSearch(sc.next());
+		/*try 
 		{
 			/*
 			 * Using different keyword depends on the last number of your student ID
@@ -15,14 +30,20 @@ public class Main
 			 * 4,5:Pokemon
 			 * 6,7:Tissue
 			 * 8,9:Process
+<<<<<<< Updated upstream
 			 */
 			System.out.println(new GoogleQuery("Tomato").query());
+=======
+			 *
+			
+			//System.out.println(new GoogleQuery(search).query());
+>>>>>>> Stashed changes
 //			GoogleQuery g = new GoogleQuery("NCCU");
 //			g.query();
 		} 
 		catch (IOException e) 
 		{
 			e.printStackTrace();
-		}
+		}*/
 	}
 }
