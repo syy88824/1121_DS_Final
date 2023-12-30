@@ -105,7 +105,7 @@ public class GoogleQuery
 //				e.printStackTrace();
 			}
 		}
-		return retVal;
+		//return retVal;
 	}
 	
 	//加入爬子網頁的method
