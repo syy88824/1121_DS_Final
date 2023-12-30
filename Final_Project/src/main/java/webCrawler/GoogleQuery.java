@@ -50,14 +50,14 @@ public class GoogleQuery
 		return retVal;
 	}
 	
-	public void query() throws IOException
+	public HashMap<String, String> query() throws IOException
 	{
 		if(content == null)
 		{
 			content = fetchContent();
 		}
 
-		//HashMap<String, String> retVal = new HashMap<String, String>();
+		HashMap<String, String> retVal = new HashMap<String, String>();
 		
 		
 		/* 
@@ -88,7 +88,7 @@ public class GoogleQuery
 				System.out.println("Title: "+title + " , url: " + citeUrl);
 				
 				//put title and pair into HashMap
-				//retVal.put(title, citeUrl);
+				retVal.put(title, citeUrl);
 
 
 				// Create a WebPage instance for the current result
@@ -98,18 +98,18 @@ public class GoogleQuery
                 WebNode webNode = new WebNode(webPage);
 
 
-				crawlSubpages(citeUrl, webNode);
+				crawlSubpages(citeUrl, webNode, retVal);
 				
 			} catch (IndexOutOfBoundsException e) 
 			{
 //				e.printStackTrace();
 			}
 		}
-		//return retVal;
+		return retVal;
 	}
 	
 	//加入爬子網頁的method
-	private void crawlSubpages(String url, WebNode parentNode) {
+	private void crawlSubpages(String url, WebNode parentNode, HashMap<String, String> retVal) {
 	    try {
 	        
 	        String realUrl = extractRealUrl(url);
@@ -128,6 +128,8 @@ public class GoogleQuery
 	        }
 	        System.out.println("子網頁內容:\n" + subPageContent);
 
+			// 將子網頁放入HASHMAP
+			retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
 
 			// Create a WebPage instance for the subpage
             WebPage subPage = new WebPage("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
@@ -139,7 +141,7 @@ public class GoogleQuery
             parentNode.addChild(subNode);
 
             // Recursively crawl subpages for the subNode
-            crawlSubpages(realUrl, subNode);
+            crawlSubpages(realUrl, subNode, retVal);
 
 	        
 	        //retVal.put("Subpage Title: " + subPageTitle, "Subpage Content:\n" + subPageContent);
