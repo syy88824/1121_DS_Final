@@ -18,7 +18,7 @@ public class WebTree {
 	public void setPostOrderScore() throws IOException{
 		setPostOrderScore(root);
 		if(rootPage != null) {
-			quickSort.Keyword rootNode = new quickSort.Keyword(rootPage.url, root.nodeScore);
+			quickSort.Keyword rootNode = new quickSort.Keyword(rootPage.name, rootPage.url, root.nodeScore);
 			rootList.add(rootNode);
 		}		
 	}
