@@ -1,20 +1,18 @@
-<%@ page import="java.sql.*" %>
-<%@ page import="javax.naming.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Seeries</title>
-<style>
+<style type="text/css">
 
     html{
         font-size: 62.5%;
     }
 
     body{
-        background-image: url('./images/searchPage.jpg');
+        background-image: url('searchPage.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -80,7 +78,7 @@
     }
 
     #searchButton{
-        background-image: url("./images/searchIcon.png");
+        background-image: url("searchIcon.png");
         background-size: 2.5rem;
         background-color: #D9D9D9;
         background-repeat: no-repeat;
@@ -92,31 +90,20 @@
     }
     
 </style>
-     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-		var googleTranslateElement; //global var for Google Translate Element
-		
-		function googleTranslateElementInit() {
-		
-		    if (googleTranslateElement) return; //var being non-empty means element already created
-		    //store Google Translate Element in our var
-		    googleTranslateElement = new google.translate.TranslateElement({pageLanguage: 'auto', includedLanguages: 'en,ko,ja,id,ms,th,vi,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL},'google_translate_element');
-		    return; 
-	
-		}
-		
-	</script>
+<script type="text/javascript">
+</script>
 </head>
 <body>
-     <form action='Servlet' method='get'>
+     <form action='${requestUri}' method='get'>
         <div id="mainContainer">
             <p id="title">Seeries</p>
         </div>
         <div id="searchContainer">
             <div id="inputContainer">
-                <input type='text' id="inputSearch" name='inputSearch' placeholder='Enter the keyword' onsubmit="googleTranslateElementInit()"/>
+                <input type='text' id="inputSearch" name='keyword' placeholder='請輸入關鍵字'/>
             </div>
             <div id="buttonContainer">
-                <button id="searchButton" type="submit"></button>
+                <button id="searchButton"></button>
             </div>
 
             

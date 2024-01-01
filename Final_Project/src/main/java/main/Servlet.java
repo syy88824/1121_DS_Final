@@ -1,10 +1,12 @@
 package main;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import javax.servlet.ServletException;
+import javax.servlet.*;
+import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -63,8 +65,8 @@ public class Servlet extends HttpServlet {
 		    num++;
 		    System.out.println("key = " + key + "   value = " + value);
 		}
-		/*request.getRequestDispatcher("result.jsp")
-		 .forward(request, response); */
+		request.getRequestDispatcher("index2.jsp")
+		.forward(request, response);
 	}
 
 	/**
