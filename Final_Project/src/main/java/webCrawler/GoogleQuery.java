@@ -53,7 +53,6 @@ public class GoogleQuery
 		while ((line = bufReader.readLine()) != null) {
 			retVal += line;
 		}
-		System.out.println("data size = " + retVal);
 		return retVal;
 	}
 
@@ -70,6 +69,7 @@ public class GoogleQuery
 			String line = null;
 			while ((line = br.readLine()) != null){
 			    retVal = retVal + line + "\n";
+			    
 			}
 			
 		} catch (MalformedURLException e) {
@@ -157,6 +157,7 @@ public class GoogleQuery
 		for (Element li : lis) {
 			//System.out.println("GoogleQuery151  an element");
 			try {
+				System.out.println("GoogleQuery160  html size = " + li.attributesSize());
 				String citeUrl = li.select("a").get(0).attr("href").replace("/url?q=", "");
 				citeUrl = java.net.URLDecoder.decode(citeUrl, "UTF-8");
 				String[] clean = citeUrl.split("&sa");

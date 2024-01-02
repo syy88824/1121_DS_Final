@@ -12,7 +12,7 @@
     }
 
     body{
-        background-image: url('./images/searchPage.jpg');
+        background-image: url('searchPage.jpg');
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -78,7 +78,7 @@
     }
 
     #searchButton{
-        background-image: url("./images/searchIcon.png");
+        background-image: url("searchIcon.png");
         background-size: 2.5rem;
         background-color: #D9D9D9;
         background-repeat: no-repeat;
