@@ -26,8 +26,9 @@ public class WebNode {
 		//nodeScore += all children's nodeScore 
 		for(WebNode child : children){
 			nodeScore += child.nodeScore;
+			System.out.println("(webNode 29) node score = " + nodeScore + "   child.nodeScore = " + child.nodeScore);
 		}	
-		System.out.println("(webNode 29) node score = " + nodeScore);
+		
 	}
 	
 	public void addChild(WebNode child){

@@ -7,7 +7,7 @@ public class Main
 {
 	//static String search = "";
 	
-	public static void setSearch(String search) {
+	public static void setSearch(String search) throws Exception {
 		//Main.search = search;
 		try {
 			System.out.println(new GoogleQuery(search).query());
@@ -17,7 +17,7 @@ public class Main
 		}
 	}
 	
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception 
 	{
 		Scanner sc = new Scanner(System.in);
 		Main.setSearch(sc.next());

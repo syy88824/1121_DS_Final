@@ -3,11 +3,7 @@ package quickSort;
 import java.util.ArrayList;
 
 public class KeywordList {
-	public ArrayList<Keyword> lst;
-	
-	public KeywordList(){
-		this.lst =  new ArrayList<Keyword>();
-	}
+	public static ArrayList<Keyword> lst = new ArrayList<Keyword>();
 	
 	public void add(Keyword keyword){
 		System.out.println("keyword add");
@@ -15,20 +11,25 @@ public class KeywordList {
     }
 	
 	//Quick sort
-	public ArrayList<Keyword> sort(){
-		if(lst.size() == 0)
+	public static ArrayList<Keyword> sort( ArrayList<Keyword> list){
+		if(list.size() == 0)
 		{
 			System.out.println("InvalidOperation");
-			lst = null;
+			list = null;
 		}
 		else 
 		{
-			quickSort(0, lst.size()-1);
+			System.out.println("26  quickSort.keywordList.size = " + list.size());
+			quickSort(0, list.size()-1);
 		}
-		return lst;		
+		return list;		
 	}
+	public static ArrayList<Keyword> getLst() {
+		return lst;
+	}
+
 	//inplace quick sort改成由大到小
-	private void quickSort(int leftbound, int rightbound){
+	private static void quickSort(int leftbound, int rightbound){
 		if (leftbound < rightbound) 
 		{
 			//因為需要一直用i++來移指標 所以一開始要設leftBound-1
@@ -51,7 +52,7 @@ public class KeywordList {
 		}
 	}
 
-	private void swap(int aIndex, int bIndex){
+	private static void swap(int aIndex, int bIndex){
 		Keyword temp = lst.get(aIndex);
 		lst.set(aIndex, lst.get(bIndex));
 		lst.set(bIndex, temp);

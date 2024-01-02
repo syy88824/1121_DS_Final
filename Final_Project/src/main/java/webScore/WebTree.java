@@ -3,7 +3,6 @@ package webScore;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 import quickSort.Keyword;
 
@@ -36,24 +35,7 @@ public class WebTree {
 		startNode.setNodeScore();
 	}
 	
-	//把這裡改成return Entry<String, String> entry  分數最大的要最先進去
-	//rsNum>6時不再繼續處理結果
-	public HashMap<String, String> sortResult(){
-		//eularPrintTree(root);
-		int rsNum = 0;
-		ArrayList<Keyword> results = rootList.sort();
-		HashMap<String, String> rsMap = new HashMap<String, String>();
-		for(quickSort.Keyword result : results) {
-			rsNum++;
-			rsMap.put(result.link, result.title);
-			if(rsNum >6) {
-				break;
-			}
-			
-		}
-		//rootList.output();
-		return rsMap;
-	}
+
 	
 	private void eularPrintTree(WebNode startNode){
 		int nodeDepth = startNode.getDepth();

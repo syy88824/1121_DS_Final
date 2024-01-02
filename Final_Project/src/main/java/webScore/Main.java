@@ -28,12 +28,12 @@ public class Main {
 		tree.root.addChild(new WebNode(new WebPage("http://soslab.nccu.edu.tw/Publications.html","Publication")));
 =======
 		// Iterate through each child node and crawl its subpages*/
-        for (WebNode childNode : tree.root.children) {
+       /* for (WebNode childNode : tree.root.children) {
             crawlSubpages(childNode);
         }
 
 		
-		/*tree.root.addChild(new WebNode(new WebPage("http://soslab.nccu.edu.tw/Publications.html","Publication")));
+		tree.root.addChild(new WebNode(new WebPage("http://soslab.nccu.edu.tw/Publications.html","Publication")));
 >>>>>>> df45820cd4de2bf10b4372877cbd63fa2a328e10
 		tree.root.addChild(new WebNode(new WebPage("http://soslab.nccu.edu.tw/Projects.html","Projects")));
 		tree.root.children.get(1).addChild(new WebNode(new WebPage("https://vlab.cs.ucsb.edu/stranger/", "Stranger")));
@@ -69,7 +69,7 @@ public class Main {
 		}
 		
 
-	private static void crawlSubpages(WebNode parentNode) {
+	/*private static void crawlSubpages(WebNode parentNode) {
         try {
             String url = parentNode.webPage.url;
             HashMap<String, String> subpages = new webCrawler.GoogleQuery(url).query();
@@ -86,7 +86,7 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
 //>>>>>>> df45820cd4de2bf10b4372877cbd63fa2a328e10
 	

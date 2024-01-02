@@ -1,8 +1,5 @@
-<<<<<<< Updated upstream
-=======
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
->>>>>>> Stashed changes
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +12,7 @@
     }
 
     body{
-<<<<<<< Updated upstream
-        background-image: url('searchPage.jpg');
-=======
         background-image: url('./images/searchPage.jpg');
->>>>>>> Stashed changes
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
@@ -85,11 +78,7 @@
     }
 
     #searchButton{
-<<<<<<< Updated upstream
-        background-image: url("searchIcon.png");
-=======
         background-image: url("./images/searchIcon.png");
->>>>>>> Stashed changes
         background-size: 2.5rem;
         background-color: #D9D9D9;
         background-repeat: no-repeat;
@@ -105,11 +94,7 @@
 </script>
 </head>
 <body>
-<<<<<<< Updated upstream
-     <form action='${requestUri}' method='get'>
-=======
      <form action='Servlet' method='get'>
->>>>>>> Stashed changes
         <div id="mainContainer">
             <p id="title">Seeries</p>
         </div>

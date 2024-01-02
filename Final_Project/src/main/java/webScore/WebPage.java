@@ -24,5 +24,6 @@ public class WebPage {
 			k.setCount(counter.countKeyword(k.name));
 			score += k.weight * k.count;
 		}
+		System.out.println("(WebPage27) webPage score = " + score);
 	}	
 }

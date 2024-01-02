@@ -1,8 +1,8 @@
 package quickSort;
 
 public class Keyword {
-	public String link, title;
-    public double score;
+	public String link, title = "";
+    public double score = 0;
     
     //這裡的keyword是每個爬到的rootLink跟他們的score
     //score不用print出來 但要用來做quickSort的比較 所以必須留著

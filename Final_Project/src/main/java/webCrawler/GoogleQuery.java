@@ -16,6 +16,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import quickSort.Keyword;
 import webScore.*;
 
 public class GoogleQuery 
@@ -52,6 +53,7 @@ public class GoogleQuery
 		while ((line = bufReader.readLine()) != null) {
 			retVal += line;
 		}
+		System.out.println("data size = " + retVal);
 		return retVal;
 	}
 
@@ -80,19 +82,6 @@ public class GoogleQuery
 		return retVal;
 	}
 
-	// New method to fetch sub-webpage titles and URLs
-	/*
-	 * private void fetchSubWebPages() throws IOException { Document doc =
-	 * Jsoup.parse(content); Elements links = doc.select("a[href]");
-	 * 
-	 * for (Element link : links) { String subPageUrl = link.absUrl("href");
-	 * 
-	 * if (!subPageUrl.isEmpty())
-	 * 		 { String subPageTitle = link.text(); 
-			 * WebPage subWebPage = new WebPage(subPageUrl, subPageTitle);
-			 * subWebPages.add(subWebPage); } 
-		} }
-	 */
 	private ArrayList<WebNode> fetchSublink(String link) throws IOException {
 		ArrayList<WebNode> sub = new ArrayList<WebNode>();
 
@@ -121,7 +110,9 @@ public class GoogleQuery
 		}
 
 		Document doc = Jsoup.parse(content);
-		Elements aLinks = doc.select("a[href]");
+		//規範要抓的子網頁種類範圍
+		String range = "*:not(:contains(privacy)):not(img):not(:contains(login)):not(:contains(register)), a[href]";
+		Elements aLinks = doc.select(range);
 		for (Element element : aLinks) {
 			String suburl = element.attr("href");
 			String subtitle = element.text();
@@ -140,7 +131,11 @@ public class GoogleQuery
 			}
 
 		}
-		System.out.println(sub);
+		System.out.println("GoogleQuery 130");
+		for(WebNode s : sub) {
+			WebPage p = s.webPage;
+			System.out.println("url = " + p.url + "   name = " + p.name);
+		}
 
 		return sub;
 	}
@@ -149,7 +144,7 @@ public class GoogleQuery
 	public HashMap<String, String> query() throws Exception {
 		if (content == null) {
 			content = fetchContent();
-
+			
 		}
 		
 		HashMap<String, String> retVal = new HashMap<>();
@@ -183,7 +178,8 @@ public class GoogleQuery
 		return retVal;
 	}
 	
-	public HashMap<String, String> score() throws Exception {
+	//幫每個爬到的結果加上Score
+	public void score() throws Exception {
 		HashMap<String, String> webMap = this.query();
 		System.out.println("webMap size = " + webMap.size());
 		for (Map.Entry<String, String> webMapEntry : webMap.entrySet()) {
@@ -195,12 +191,35 @@ public class GoogleQuery
 			WebNode rootNode = new WebNode(rootPage);				
 			ArrayList<WebNode> subPages = fetchSublink(url);
 			for(WebNode subPage : subPages) {
-				System.out.println("GoogleQuery190  addChild ");
+				//System.out.println("GoogleQuery190  addChild ");
 				rootNode.addChild(subPage);
 			}
 			WebTree tree = new WebTree(rootPage);
-			tree.setPostOrderScore();
+			//set完score之後把這個網頁用quickSort.keyword加到quickSort.keywordList裡面
+			tree.setPostOrderScore();			
 		}
-		return webMap;
+		System.out.println("Query196  rank rs = ");
+		sortResult();
 	}
+	
+	//把這裡改成return Entry<String, String> entry  分數最大的要最先進去
+	//rsNum>6時不再繼續處理結果
+	public HashMap<String, String> sortResult(){
+		//eularPrintTree(root);
+		int rsNum = 0;
+		ArrayList<Keyword> results = quickSort.KeywordList.sort(quickSort.KeywordList.getLst());
+		HashMap<String, String> rsMap = new HashMap<String, String>();
+		for(quickSort.Keyword result : results) {
+			rsNum++;
+			rsMap.put(result.link, result.title);
+			System.out.println("num = " + rsNum + "   title = " + result.title + "   score = " + result.score);
+			if(rsNum >6) {
+				break;
+			}
+			
+		}
+		//rootList.output();
+		return rsMap;
+	}
+	
 }

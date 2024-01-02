@@ -28,6 +28,7 @@ public class KeywordList {
 	webScore.Keyword k19 = new webScore.Keyword("男主角", 2);
 	webScore.Keyword k20 = new webScore.Keyword("女主角", 2);
 	webScore.Keyword k21 = new webScore.Keyword("得獎", 2);
+	webScore.Keyword k22 = new webScore.Keyword("女子圖艦", 20);
 	public ArrayList<webScore.Keyword> key;
 	
 	public ArrayList<webScore.Keyword> getList() {
@@ -54,6 +55,7 @@ public class KeywordList {
 		key.add(k19);
 		key.add(k20);
 		key.add(k21);
+		key.add(k22);
 		return key;
 	}
 	
