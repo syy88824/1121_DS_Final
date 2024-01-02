@@ -201,8 +201,8 @@ public class GoogleQuery
 			//set完score之後把這個網頁用quickSort.keyword加到quickSort.keywordList裡面
 			tree.setPostOrderScore();			
 		}
-		System.out.println("Query196  rank rs = ");
-		sortResult();
+		/*System.out.println("Query196  rank rs = ");
+		sortResult();*/
 	}
 	
 	//把這裡改成return Entry<String, String> entry  分數最大的要最先進去
