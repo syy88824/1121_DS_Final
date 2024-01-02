@@ -4,65 +4,50 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Seeries</title>
+<title>GoogleSearch</title>
 <style type="text/css">
 
     html{
         font-size: 62.5%;
     }
 
-    body{
-        background-image: url('searchPage.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-attachment: fixed;
+    #photo{
+        background-image: url("searchPage.jpg");
+        width: 100%;
+        height: 20rem;
         display: flex;
     }
 
-    div{
-        display: flex;
-    }
-
-    #mainContainer{
-        display: flex;
-        align-items: center;
-        align-self: center;
-    }
-
-    #title{
+    #brand{
         color: #fff;
-        text-align: center;
-        letter-spacing: 36px;
-        max-width: 46.4rem;
-        font-size: 10rem;
+        letter-spacing: 3rem;
+        font-size: 5rem;
         font-family: Garamond, serif;
-        margin-top: 15rem;
-        margin-bottom: 5rem;
-        margin-left: 45rem;
-        align-self: center;
+        margin-left: 13rem;
+        margin-top: 0rem;
+        padding-top: 7rem;
     }
 
     #searchContainer{
-        align-items: center;
-        align-self: center;
+        display: flex;
     }
 
-    #inputContainer{
+    #inputBox{
         border: none;
         background-color: #D9D9D9;
-        width: 35rem;
+        width: 60rem;
         height: 4rem;
         border-radius: 10rem 0 0 10rem;
-        align-self: center;
-        margin-right: 1rem;
-        margin-left: 50rem;
+        margin-top: 9rem;
+        margin-left: 8rem;
     }
 
     #inputSearch{
         border: none;
         background-color: #D9D9D9;
         margin-left: 2rem;
-        width: 33rem;        
+        margin-top: 1.1rem;
+        width: 55rem;
     }
 
     #inputSearch:focus {
@@ -75,6 +60,8 @@
         background-color: #D9D9D9;
         border: none;
         border-radius: 0 10rem 10rem 0; 
+        margin-top:9rem;
+        margin-left: 1rem;
     }
 
     #searchButton{
@@ -85,30 +72,27 @@
         width: 2.5rem;
         height: 3rem;
         border: none;
-        margin-top: 0.7rem;
         margin-left: 0.2rem;
+        margin-top: 0.7rem;
     }
-    
+
 </style>
-<script type="text/javascript">
-</script>
 </head>
 <body>
-     <form action='${requestUri}' method='get'>
-        <div id="mainContainer">
-            <p id="title">Seeries</p>
-        </div>
+<body style='background-color: #D9D9D9'>
+<form action='${requestUri}' method='get'>
+    <div id="photo">
+        <p id="brand">Seeries</p>
         <div id="searchContainer">
-            <div id="inputContainer">
+            <div id="inputBox">
                 <input type='text' id="inputSearch" name='keyword' placeholder='請輸入關鍵字'/>
             </div>
             <div id="buttonContainer">
                 <button id="searchButton"></button>
             </div>
-
-            
         </div>
-        
+    </div>
+
 
 </form>
 </body>
