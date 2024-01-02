@@ -21,7 +21,7 @@ public class KeywordList {
 	webScore.Keyword k12 = new webScore.Keyword("追劇", 4);
 	webScore.Keyword k13 = new webScore.Keyword("線上看", 4);
 	webScore.Keyword k14 = new webScore.Keyword("必看", 4);
-	webScore.Keyword k15 = new webScore.Keyword("推薦", 4);
+	webScore.Keyword k15 = new webScore.Keyword("台北", 4);
 	webScore.Keyword k16 = new webScore.Keyword("愛奇藝", 3);
 	webScore.Keyword k17 = new webScore.Keyword("劇情", 3);
 	webScore.Keyword k18 = new webScore.Keyword("排行榜", 2);

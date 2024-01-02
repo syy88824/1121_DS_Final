@@ -62,7 +62,7 @@ public class Main {
 			}*/
 			
 			tree.setPostOrderScore();
-			tree.eularPrintTree();
+			//tree.eularPrintTree();
 			
 			
 			

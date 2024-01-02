@@ -12,6 +12,7 @@ public class WebNode {
 	public WebNode(WebPage webPage){
 		this.webPage = webPage;
 		this.children = new ArrayList<WebNode>();
+		this.nodeScore = 0;
 	}
 	
 	public void setNodeScore() throws IOException{
@@ -26,7 +27,11 @@ public class WebNode {
 		for(WebNode child : children){
 			nodeScore += child.nodeScore;
 		}	
+<<<<<<< Updated upstream
 		System.out.println("(webNode 29) node score = " + nodeScore);
+=======
+		System.out.println("(WebNode29)  nodeScore = " + nodeScore);
+>>>>>>> Stashed changes
 	}
 	
 	public void addChild(WebNode child){

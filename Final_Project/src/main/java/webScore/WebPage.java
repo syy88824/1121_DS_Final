@@ -14,6 +14,7 @@ public class WebPage {
 		this.url = url;
 		this.name = name;
 		this.counter = new WordCounter(url);	
+		this.score = 0;
 	}
 	
 	public void setScore() throws IOException{

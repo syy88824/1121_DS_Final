@@ -49,22 +49,30 @@ public class Servlet extends HttpServlet {
 		String keyword = request.getParameter("inputSearch");
 		System.out.println("keyword = " + keyword);
 		GoogleQuery google = new GoogleQuery(keyword);
-		HashMap<String, String> query = google.query();
+		
+		try {
+			HashMap<String, String> query;
+			query = google.score();
+			System.out.println("servlet 54");
+			String[][] s = new String[query.size()][2];
+			request.setAttribute("query", s);
+			int num = 0;
+			for(Entry<String, String> entry : query.entrySet()) {
+			    String key = entry.getKey();
+			    String value = entry.getValue();
+			    s[num][0] = key;
+			    s[num][1] = value;
+			    num++;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//System.out.println(google.query());
 		
-		String[][] s = new String[query.size()][2];
-		request.setAttribute("query", s);
-		int num = 0;
-		for(Entry<String, String> entry : query.entrySet()) {
-		    String key = entry.getKey();
-		    String value = entry.getValue();
-		    s[num][0] = key;
-		    s[num][1] = value;
-		    num++;
-		    System.out.println("key = " + key + "   value = " + value);
-		}
-		/*request.getRequestDispatcher("result.jsp")
-		 .forward(request, response); */
+		System.out.println("servlet 65");
+		request.getRequestDispatcher("index2.jsp")
+		 .forward(request, response); 
 	}
 
 	/**
