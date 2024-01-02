@@ -58,7 +58,6 @@ public class Servlet extends HttpServlet {
 			    s[num][0] = key;
 			    s[num][1] = value;
 			    num++;
-			    System.out.println("Servlet60  num++");
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -67,8 +66,9 @@ public class Servlet extends HttpServlet {
 		//System.out.println(google.query());
 		
 		System.out.println("servlet 65");
-		request.getRequestDispatcher("NewFile.jsp")
-		 .forward(request, response); 
+		request.getRequestDispatcher("index2.jsp")
+		 .forward(request, response);
+		quickSort.KeywordList.resetLst();
 	}
 
 	/**

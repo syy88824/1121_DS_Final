@@ -10,6 +10,10 @@ public class KeywordList {
 		lst.add(keyword);
     }
 	
+	public static void resetLst() {
+		lst = new ArrayList<Keyword>();
+	}
+	
 	//Quick sort
 	public static ArrayList<Keyword> sort( ArrayList<Keyword> list){
 		if(list.size() == 0)
@@ -19,7 +23,6 @@ public class KeywordList {
 		}
 		else 
 		{
-			System.out.println("26  quickSort.keywordList.size = " + list.size());
 			quickSort(0, list.size()-1);
 		}
 		return list;		

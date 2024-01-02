@@ -22,14 +22,17 @@ import webScore.*;
 public class GoogleQuery 
 {
 	public String searchKeyword;
-	public String url;
+	public ArrayList<String> urls = new ArrayList<String>();
 	public String content;
 
 	public GoogleQuery(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
 		try {
 			String encodeKeyword = java.net.URLEncoder.encode(searchKeyword, "utf-8");
-			this.url = "https://www.google.com/search?q=" + encodeKeyword + "&oe=utf8&num=20";
+			this.urls.add("https://www.google.com/search?q=" + encodeKeyword + "series&oe=utf8&num=3");
+			this.urls.add("https://www.google.com/search?q=" + encodeKeyword + "movie&oe=utf8&num=5");
+			this.urls.add("https://www.google.com/search?q=" + encodeKeyword + "drama&oe=utf8&num=5");
+			this.urls.add("https://www.google.com/search?q=" + encodeKeyword + "documentary&oe=utf8&num=2");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -39,20 +42,22 @@ public class GoogleQuery
 
 	private String fetchContent() throws Exception {
 		String retVal = "";
+		for(String url : urls) {
+			URL u = new URL(url);
+			SslUtils.ignoreSsl();
+			URLConnection conn = u.openConnection();
+			conn.setRequestProperty("User-agent", "Chrome/107.0.5304.107");
+			InputStream in = conn.getInputStream();
 
-		URL u = new URL(url);
-		SslUtils.ignoreSsl();
-		URLConnection conn = u.openConnection();
-		conn.setRequestProperty("User-agent", "Chrome/107.0.5304.107");
-		InputStream in = conn.getInputStream();
+			InputStreamReader inReader = new InputStreamReader(in, "utf-8");
+			BufferedReader bufReader = new BufferedReader(inReader);
+			String line = null;
 
-		InputStreamReader inReader = new InputStreamReader(in, "utf-8");
-		BufferedReader bufReader = new BufferedReader(inReader);
-		String line = null;
-
-		while ((line = bufReader.readLine()) != null) {
-			retVal += line;
+			while ((line = bufReader.readLine()) != null) {
+				retVal += line;
+			}
 		}
+		
 		return retVal;
 	}
 
@@ -131,7 +136,7 @@ public class GoogleQuery
 			}
 
 		}
-		System.out.println("GoogleQuery 130");
+		System.out.println("GoogleQuery 130 subURLs");
 		for(WebNode s : sub) {
 			WebPage p = s.webPage;
 			System.out.println("url = " + p.url + "   name = " + p.name);
@@ -157,7 +162,6 @@ public class GoogleQuery
 		for (Element li : lis) {
 			//System.out.println("GoogleQuery151  an element");
 			try {
-				System.out.println("GoogleQuery160  html size = " + li.attributesSize());
 				String citeUrl = li.select("a").get(0).attr("href").replace("/url?q=", "");
 				citeUrl = java.net.URLDecoder.decode(citeUrl, "UTF-8");
 				String[] clean = citeUrl.split("&sa");
@@ -167,8 +171,6 @@ public class GoogleQuery
 				if (title.equals("")) {
 					continue;
 				}
-				//citeUrl = citeUrl.substring(7);
-				//System.out.println("Title: " + title + " , url: " + citeUrl);
 				retVal.put(title, citeUrl);
 				
 			} catch (IndexOutOfBoundsException e) {
@@ -183,16 +185,16 @@ public class GoogleQuery
 	public void score() throws Exception {
 		HashMap<String, String> webMap = this.query();
 		System.out.println("webMap size = " + webMap.size());
-		for (Map.Entry<String, String> webMapEntry : webMap.entrySet()) {
-			System.out.println("GoogleQuery 183 countScore");
+		//System.out.println("GoogleQuery 183 countScore");
+		
+		for (Map.Entry<String, String> webMapEntry : webMap.entrySet()) {			
 			String url = webMapEntry.getValue();
-			String title = webMapEntry.getKey();
-			System.out.println("GoogleQuery186  url = " + url + "   title = " + title);
+			String title = webMapEntry.getKey();			
 			WebPage rootPage = new WebPage(url, title);
 			WebNode rootNode = new WebNode(rootPage);				
+			System.out.println("GoogleQuery186  url = " + url + "   title = " + title);
 			ArrayList<WebNode> subPages = fetchSublink(url);
 			for(WebNode subPage : subPages) {
-				//System.out.println("GoogleQuery190  addChild ");
 				rootNode.addChild(subPage);
 			}
 			WebTree tree = new WebTree(rootPage);
