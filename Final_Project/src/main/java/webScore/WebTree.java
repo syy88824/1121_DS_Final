@@ -22,11 +22,7 @@ public class WebTree {
 	public void setPostOrderScore() throws IOException{
 		setPostOrderScore(root);
 		if(rootPage != null) {
-<<<<<<< Updated upstream
-			quickSort.Keyword rootNode = new quickSort.Keyword(rootPage.name, rootPage.url, root.nodeScore);
-=======
 			quickSort.Keyword rootNode = new quickSort.Keyword(rootPage.url, rootPage.name, root.nodeScore);
->>>>>>> Stashed changes
 			rootList.add(rootNode);
 		}		
 	}
