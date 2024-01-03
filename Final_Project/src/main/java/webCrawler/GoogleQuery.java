@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.jsoup.Jsoup;
@@ -16,7 +17,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import quickSort.Keyword;
+import quickSort.Keyweb;
+import quickSort.KeywebList;
 import webScore.*;
 
 public class GoogleQuery 
@@ -33,6 +35,7 @@ public class GoogleQuery
 			this.urls.add("https://www.google.com/search?q=" + encodeKeyword + "movie&oe=utf8&num=5");
 			this.urls.add("https://www.google.com/search?q=" + encodeKeyword + "drama&oe=utf8&num=5");
 			this.urls.add("https://www.google.com/search?q=" + encodeKeyword + "documentary&oe=utf8&num=2");
+			//this.urls.add("https://www.google.com/search?q=" + encodeKeyword + "anime&oe=utf8&num=2");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -95,7 +98,8 @@ public class GoogleQuery
 		int where = 0;
 		String concatlink = "1";
 		String content = this.fetchContent(link);
-
+		System.out.println("Query101   html size = " + content.length());
+		
 //		�P�_�����O���O�l����
 		for (int i = 0; i < link.length(); i++) {
 			slash = link.charAt(i);
@@ -146,16 +150,17 @@ public class GoogleQuery
 	}
 
 	//透過關鍵字爬到的所有結果
-	public HashMap<String, String> query() throws Exception {
+	public LinkedHashMap<String, String> query() throws Exception {
 		if (content == null) {
 			content = fetchContent();
 			
 		}
 		
-		HashMap<String, String> retVal = new HashMap<>();
-
+		LinkedHashMap<String, String> retVal = new LinkedHashMap<>();
+		LinkedHashMap<String, String> preRetVal = new LinkedHashMap<>();
 		Document doc = Jsoup.parse(content);
-		Elements lis = doc.select("div");
+		String range = "*:not(:contains(.pdf)), div";
+		Elements lis = doc.select(range);
 		lis = lis.select(".kCrYT");
 
 		//針對每一個搜尋結果的動作
@@ -175,7 +180,9 @@ public class GoogleQuery
 				
 			} catch (IndexOutOfBoundsException e) {
 				// e.printStackTrace();
+				//return;
 			}
+			//preRetVal.put(range, range)
 		}
 
 		return retVal;
@@ -183,7 +190,7 @@ public class GoogleQuery
 	
 	//幫每個爬到的結果加上Score
 	public void score() throws Exception {
-		HashMap<String, String> webMap = this.query();
+		LinkedHashMap<String, String> webMap = this.query();
 		System.out.println("webMap size = " + webMap.size());
 		//System.out.println("GoogleQuery 183 countScore");
 		
@@ -201,18 +208,16 @@ public class GoogleQuery
 			//set完score之後把這個網頁用quickSort.keyword加到quickSort.keywordList裡面
 			tree.setPostOrderScore();			
 		}
-		/*System.out.println("Query196  rank rs = ");
-		sortResult();*/
 	}
 	
 	//把這裡改成return Entry<String, String> entry  分數最大的要最先進去
 	//rsNum>6時不再繼續處理結果
-	public HashMap<String, String> sortResult(){
+	public LinkedHashMap<String, String> sortResult(){
 		//eularPrintTree(root);
 		int rsNum = 0;
-		ArrayList<Keyword> results = quickSort.KeywordList.sort(quickSort.KeywordList.getLst());
-		HashMap<String, String> rsMap = new HashMap<String, String>();
-		for(quickSort.Keyword result : results) {
+		ArrayList<Keyweb> results = KeywebList.sort(KeywebList.getLst());
+		LinkedHashMap<String, String> rsMap = new LinkedHashMap<String, String>();
+		for(Keyweb result : results) {
 			rsNum++;
 			rsMap.put(result.link, result.title);
 			System.out.println("num = " + rsNum + "   title = " + result.title + "   score = " + result.score);

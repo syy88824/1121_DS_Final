@@ -1,7 +1,7 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="javax.naming.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+ pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -92,18 +92,6 @@
     }
     
 </style>
-     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-		var googleTranslateElement; //global var for Google Translate Element
-		
-		function googleTranslateElementInit() {
-		
-		    if (googleTranslateElement) return; //var being non-empty means element already created
-		    //store Google Translate Element in our var
-		    googleTranslateElement = new google.translate.TranslateElement({pageLanguage: 'auto', includedLanguages: 'en,ko,ja,id,ms,th,vi,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL},'google_translate_element')return; 
-	
-		}
-		
-	</script>
 </head>
 <body>
      <form action='Servlet' method='get'>
@@ -112,13 +100,11 @@
         </div>
         <div id="searchContainer">
             <div id="inputContainer">
-                <input type='text' id="inputSearch" name='inputSearch' placeholder='Enter the keyword' onsubmit="googleTranslateElementInit()"/>
+                <input type='text' id="inputSearch" name='inputSearch' placeholder='Enter the keyword'/>
             </div>
             <div id="buttonContainer">
                 <button id="searchButton" type="submit"></button>
             </div>
-
-            
         </div>
         
 

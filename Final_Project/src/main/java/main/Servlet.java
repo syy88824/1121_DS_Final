@@ -2,6 +2,7 @@ package main;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import quickSort.KeywebList;
 import webCrawler.GoogleQuery;
 
 /**
@@ -47,7 +49,7 @@ public class Servlet extends HttpServlet {
 		
 		try {
 			google.score();
-			HashMap<String, String> query = google.sortResult();
+			LinkedHashMap<String, String> query = google.sortResult();
 			System.out.println("servlet 54");
 			String[][] s = new String[query.size()][2];
 			request.setAttribute("query", s);
@@ -68,7 +70,7 @@ public class Servlet extends HttpServlet {
 		System.out.println("servlet 65");
 		request.getRequestDispatcher("index2.jsp")
 		 .forward(request, response);
-		quickSort.KeywordList.resetLst();
+		KeywebList.resetLst();
 	}
 
 	/**

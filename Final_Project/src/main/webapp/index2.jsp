@@ -75,6 +75,23 @@
         margin-left: 0.2rem;
         margin-top: 0.7rem;
     }
+    
+    #result{
+     letter-spacing:0.5rem;
+        font-size: 2rem;
+        padding-top: 5rem;
+        width: 144rem;
+        display: inline-block;
+        font-color: #000000;
+    }
+    
+    
+    #divideLine{
+     width: 144rem;
+     height:0.1rem;
+     background-color: #000000;
+     margin-top: 5rem;
+    }
 
 </style>
 </head>
@@ -84,15 +101,30 @@
     <div id="photo">
         <p id="brand">Seeries</p>
         <div id="searchContainer">
-            <div id="inputBox">
-                <input type='text' id="inputSearch" name='keyword' placeholder='請輸入關鍵字'/>
+            <div id="inputBox"> <!-- 這個div裡面裝的是第二頁最上面的input -->
+                <input type='text' id="inputSearch" name='inputSearch' placeholder='請輸入關鍵字' value='<%=request.getParameter("keyword")%>'/>
             </div>
             <div id="buttonContainer">
-                <button id="searchButton"></button>
+                <button id="searchButton" type="submit"></button>
             </div>
         </div>
     </div>
-
+    <div id="result"> <!-- 這個div裡面裝的是所有回傳回來的東西 -->
+     <!-- 用二維陣列儲存query回傳的hashMap 再一個一個取出顯示-->
+    <%
+     String[][] orderList = (String[][]) request.getAttribute("query"); 
+     for (int i = 0; i < orderList.length; i++) {
+      String s=orderList[i][1];
+     %>
+    <a href='<%=orderList[i][0]%>'><%=orderList[i][1]%></a>
+    <!-- 印出下面黑色的線 -->
+    <div id = "divideLine"></div>
+    <br>
+    <%
+    }
+    %>
+   
+  </div>
 
 </form>
 </body>

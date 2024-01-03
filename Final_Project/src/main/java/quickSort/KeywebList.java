@@ -2,20 +2,20 @@ package quickSort;
 
 import java.util.ArrayList;
 
-public class KeywordList {
-	public static ArrayList<Keyword> lst = new ArrayList<Keyword>();
+public class KeywebList {
+	public static ArrayList<Keyweb> lst = new ArrayList<Keyweb>();
 	
-	public void add(Keyword keyword){
+	public void add(Keyweb keyword){
 		System.out.println("keyword add");
 		lst.add(keyword);
     }
 	
 	public static void resetLst() {
-		lst = new ArrayList<Keyword>();
+		lst = new ArrayList<Keyweb>();
 	}
 	
 	//Quick sort
-	public static ArrayList<Keyword> sort( ArrayList<Keyword> list){
+	public static ArrayList<Keyweb> sort( ArrayList<Keyweb> list){
 		if(list.size() == 0)
 		{
 			System.out.println("InvalidOperation");
@@ -27,7 +27,7 @@ public class KeywordList {
 		}
 		return list;		
 	}
-	public static ArrayList<Keyword> getLst() {
+	public static ArrayList<Keyweb> getLst() {
 		return lst;
 	}
 
@@ -56,14 +56,14 @@ public class KeywordList {
 	}
 
 	private static void swap(int aIndex, int bIndex){
-		Keyword temp = lst.get(aIndex);
+		Keyweb temp = lst.get(aIndex);
 		lst.set(aIndex, lst.get(bIndex));
 		lst.set(bIndex, temp);
 	}
 	
 	public void output(){
 		for(int i = 0; i < lst.size(); i++) {
-			Keyword k = lst.get(i);
+			Keyweb k = lst.get(i);
 			System.out.println("url = " + k.link + "   score = " + k.score);
 		}
 		/*StringBuilder sb = new StringBuilder();

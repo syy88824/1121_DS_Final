@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import quickSort.Keyword;
+import quickSort.Keyweb;
+import quickSort.KeywebList;
 
 public class WebTree {
 	public WebNode root;
-	public quickSort.KeywordList rootList = new quickSort.KeywordList();
+	public KeywebList rootList = new KeywebList();
 	public WebPage rootPage;
 	
 	public WebTree(WebPage rootPage){
@@ -21,7 +22,7 @@ public class WebTree {
 	public void setPostOrderScore() throws IOException{
 		setPostOrderScore(root);
 		if(rootPage != null) {
-			quickSort.Keyword rootNode = new quickSort.Keyword(rootPage.url, rootPage.name, root.nodeScore);
+			Keyweb rootNode = new Keyweb(rootPage.url, rootPage.name, root.nodeScore);
 			rootList.add(rootNode);
 		}		
 	}
