@@ -26,6 +26,7 @@ public class GoogleQuery
 	public String searchKeyword;
 	public ArrayList<String> urls = new ArrayList<String>();
 	public String content;
+	public boolean isRead = true;
 
 	public GoogleQuery(String searchKeyword) {
 		this.searchKeyword = searchKeyword;
@@ -43,6 +44,10 @@ public class GoogleQuery
 		//this.subWebPages = new ArrayList<>();
 	}
 
+	/*public boolean setRead() {
+		isRead = 
+	}*/
+	
 	private String fetchContent() throws Exception {
 		String retVal = "";
 		for(String url : urls) {
@@ -83,9 +88,11 @@ public class GoogleQuery
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "";
 		}
 		return retVal;
 	}
@@ -100,52 +107,53 @@ public class GoogleQuery
 		String content = this.fetchContent(link);
 		System.out.println("Query101   html size = " + content.length());
 		
-//		�P�_�����O���O�l����
-		for (int i = 0; i < link.length(); i++) {
-			slash = link.charAt(i);
-			if (slash == '/')
-				counter++;
-			if (counter >= 3) {
-				where = i;
-				break;
-			}
-		}
-		if(counter == 0) {
-			System.out.println("115  no subPage");
-		}
-//		���X�D���������}
-		if (where != 0) {
-			concatlink = link.substring(0, where);
-		}
-
-		Document doc = Jsoup.parse(content);
-		//規範要抓的子網頁種類範圍
-		String range = "*:not(:contains(privacy)):not(img):not(:contains(login)):not(:contains(register)), a[href]";
-		Elements aLinks = doc.select(range);
-		for (Element element : aLinks) {
-			String suburl = element.attr("href");
-			String subtitle = element.text();
-//			�D�X�}�Y���Ohttp��https���S�s�bhref���F��
-			if (!suburl.contains("http://") && !suburl.contains("https://")) {
-				if (concatlink != "1") {
-					suburl = concatlink + suburl;
-				} else {
-					suburl = link + suburl;
+		if(!content.equals("")) {
+	//		�P�_�����O���O�l����
+			for (int i = 0; i < link.length(); i++) {
+				slash = link.charAt(i);
+				if (slash == '/')
+					counter++;
+				if (counter >= 3) {
+					where = i;
+					break;
 				}
 			}
-			if (sub.size() <= 2) {
-				sub.add(new WebNode(new WebPage(suburl, subtitle)));
-			} else {
-				break;
+			if(counter == 0) {
+				System.out.println("115  no subPage");
 			}
-
+	//		���X�D���������}
+			if (where != 0) {
+				concatlink = link.substring(0, where);
+			}
+	
+			Document doc = Jsoup.parse(content);
+			//規範要抓的子網頁種類範圍
+			String range = "*:not(:contains(privacy)):not(img):not(:contains(login)):not(:contains(register)), a[href]";
+			Elements aLinks = doc.select(range);
+			for (Element element : aLinks) {
+				String suburl = element.attr("href");
+				String subtitle = element.text();
+	//			�D�X�}�Y���Ohttp��https���S�s�bhref���F��
+				if (!suburl.contains("http://") && !suburl.contains("https://")) {
+					if (concatlink != "1") {
+						suburl = concatlink + suburl;
+					} else {
+						suburl = link + suburl;
+					}
+				}
+				if (sub.size() <= 2) {
+					sub.add(new WebNode(new WebPage(suburl, subtitle)));
+				} else {
+					break;
+				}
+	
+			}
+			System.out.println("GoogleQuery 130 subURLs");
+			for(WebNode s : sub) {
+				WebPage p = s.webPage;
+				System.out.println("url = " + p.url + "   name = " + p.name);
+			}
 		}
-		System.out.println("GoogleQuery 130 subURLs");
-		for(WebNode s : sub) {
-			WebPage p = s.webPage;
-			System.out.println("url = " + p.url + "   name = " + p.name);
-		}
-
 		return sub;
 	}
 
@@ -157,35 +165,36 @@ public class GoogleQuery
 		}
 		
 		LinkedHashMap<String, String> retVal = new LinkedHashMap<>();
-		LinkedHashMap<String, String> preRetVal = new LinkedHashMap<>();
 		Document doc = Jsoup.parse(content);
-		String range = "*:not(:contains(.pdf)), div";
+		String range = "*:not([href*=.pdf]):not(:containsOwn(dramasq.cc)):not(:containsOwn(douban.com)), div";
 		Elements lis = doc.select(range);
 		lis = lis.select(".kCrYT");
 
+
 		//針對每一個搜尋結果的動作
-		for (Element li : lis) {
-			//System.out.println("GoogleQuery151  an element");
-			try {
-				String citeUrl = li.select("a").get(0).attr("href").replace("/url?q=", "");
-				citeUrl = java.net.URLDecoder.decode(citeUrl, "UTF-8");
-				String[] clean = citeUrl.split("&sa");
-				citeUrl = clean[0];
-				String title = li.select("a").get(0).select(".vvjwJb").text();
+				for (Element li : lis) {
+					//System.out.println("GoogleQuery151  an element");
+					try {
+						String citeUrl = li.select("a").get(0).attr("href").replace("/url?q=", "");
+						citeUrl = java.net.URLDecoder.decode(citeUrl, "UTF-8");
+						String[] clean = citeUrl.split("&sa");
+						citeUrl = clean[0];
+						String title = li.select("a").get(0).select(".vvjwJb").text();
 
-				if (title.equals("")) {
-					continue;
+						if (title.equals("")) {
+							continue;
+						}
+						retVal.put(title, citeUrl);
+						
+					} catch (IndexOutOfBoundsException e) {
+						// e.printStackTrace();
+						//return;
+					}
+					//preRetVal.put(range, range)
 				}
-				retVal.put(title, citeUrl);
-				
-			} catch (IndexOutOfBoundsException e) {
-				// e.printStackTrace();
-				//return;
-			}
-			//preRetVal.put(range, range)
-		}
-
-		return retVal;
+		
+	
+				return retVal;
 	}
 	
 	//幫每個爬到的結果加上Score
@@ -201,12 +210,14 @@ public class GoogleQuery
 			WebNode rootNode = new WebNode(rootPage);				
 			System.out.println("GoogleQuery186  url = " + url + "   title = " + title);
 			ArrayList<WebNode> subPages = fetchSublink(url);
-			for(WebNode subPage : subPages) {
-				rootNode.addChild(subPage);
+			if(subPages.size() != 0) {
+				for(WebNode subPage : subPages) {
+					rootNode.addChild(subPage);
+				}
+				WebTree tree = new WebTree(rootPage);
+				//set完score之後把這個網頁用quickSort.keyword加到quickSort.keywordList裡面
+				tree.setPostOrderScore();	
 			}
-			WebTree tree = new WebTree(rootPage);
-			//set完score之後把這個網頁用quickSort.keyword加到quickSort.keywordList裡面
-			tree.setPostOrderScore();			
 		}
 	}
 	

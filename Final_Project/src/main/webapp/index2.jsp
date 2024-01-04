@@ -11,6 +11,10 @@
         font-size: 62.5%;
     }
 
+	.textStyle{
+        color: #000000;
+	}
+
     #photo{
         background-image: url("./images/searchPage.jpg");
         width: 100%;
@@ -82,7 +86,6 @@
         padding-top: 5rem;
         width: 144rem;
         display: inline-block;
-        font-color: #000000;
     }
     
     
@@ -116,7 +119,7 @@
      for (int i = 0; i < orderList.length; i++) {
       String s=orderList[i][1];
      %>
-    <a href='<%=orderList[i][0]%>'><%=orderList[i][1]%></a>
+    <i class = "textStyle"></i><a href='<%=orderList[i][0]%>'><%=orderList[i][1]%></a>
     <!-- 印出下面黑色的線 -->
     <div id = "divideLine"></div>
     <br>
