@@ -1,4 +1,4 @@
-package webCrawler;
+/*package webCrawler;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ public class Main
 			 * 6,7:Tissue
 			 * 8,9:Process
 <<<<<<< Updated upstream
-			 */
+			 
 			System.out.println(new GoogleQuery("台北").query());
 			 
 			//System.out.println(new GoogleQuery("Tomato").query());
@@ -30,4 +30,4 @@ public class Main
 			e.printStackTrace();
 		}
 	}
-}
+}*/

@@ -2,27 +2,37 @@ package quickSort;
 
 import java.util.ArrayList;
 
-public class KeywordList {
-	public ArrayList<Keyword> lst = new ArrayList<Keyword>();
+public class KeywebList {
+	public static ArrayList<Keyweb> lst = new ArrayList<Keyweb>();
 	
-	public void add(Keyword keyword){
+	public void add(Keyweb keyword){
 		System.out.println("keyword add");
 		lst.add(keyword);
     }
 	
+	public static void resetLst() {
+		lst = new ArrayList<Keyweb>();
+	}
+	
 	//Quick sort
-	public void sort(){
-		if(lst.size() == 0)
+	public static ArrayList<Keyweb> sort( ArrayList<Keyweb> list){
+		if(list.size() == 0)
 		{
 			System.out.println("InvalidOperation");
+			list = null;
 		}
 		else 
 		{
-			quickSort(0, lst.size()-1);
+			quickSort(0, list.size()-1);
 		}
+		return list;		
 	}
+	public static ArrayList<Keyweb> getLst() {
+		return lst;
+	}
+
 	//inplace quick sort改成由大到小
-	private void quickSort(int leftbound, int rightbound){
+	private static void quickSort(int leftbound, int rightbound){
 		if (leftbound < rightbound) 
 		{
 			//因為需要一直用i++來移指標 所以一開始要設leftBound-1
@@ -45,15 +55,15 @@ public class KeywordList {
 		}
 	}
 
-	private void swap(int aIndex, int bIndex){
-		Keyword temp = lst.get(aIndex);
+	private static void swap(int aIndex, int bIndex){
+		Keyweb temp = lst.get(aIndex);
 		lst.set(aIndex, lst.get(bIndex));
 		lst.set(bIndex, temp);
 	}
 	
 	public void output(){
 		for(int i = 0; i < lst.size(); i++) {
-			Keyword k = lst.get(i);
+			Keyweb k = lst.get(i);
 			System.out.println("url = " + k.link + "   score = " + k.score);
 		}
 		/*StringBuilder sb = new StringBuilder();

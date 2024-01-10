@@ -1,12 +1,9 @@
 package main;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-
 import javax.servlet.*;
-import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,11 +31,6 @@ public class Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		/*response.getWriter().append("Served at: ").append(request.getContextPath());
-		request.setCharacterEncoding("UTF-8");
-		String keyword = request.getParameter("inputSearch");
-		System.out.println("Keyword = " + keyword);
-		webCrawler.Main.setSearch(keyword);*/
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html");
@@ -51,22 +43,6 @@ public class Servlet extends HttpServlet {
 		String keyword = request.getParameter("inputSearch");
 		System.out.println("keyword = " + keyword);
 		GoogleQuery google = new GoogleQuery(keyword);
-<<<<<<< Updated upstream
-		HashMap<String, String> query = google.query();
-		//System.out.println(google.query());
-		
-		String[][] s = new String[query.size()][2];
-		request.setAttribute("query", s);
-		int num = 0;
-		for(Entry<String, String> entry : query.entrySet()) {
-		    String key = entry.getKey();
-		    String value = entry.getValue();
-		    s[num][0] = key;
-		    s[num][1] = value;
-		    num++;
-		    System.out.println("key = " + key + "   value = " + value);
-		}
-=======
 		
 		try {
 			google.score();
@@ -86,7 +62,6 @@ public class Servlet extends HttpServlet {
 			e.printStackTrace();
 		}		
 		System.out.println("Finish");
->>>>>>> Stashed changes
 		request.getRequestDispatcher("index2.jsp")
 		.forward(request, response);
 	}

@@ -1,4 +1,4 @@
-package webScore;
+/*package webScore;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,33 +55,14 @@ public class Main {
 				double weight = scanner.nextDouble();
 				Keyword k = new Keyword(name, weight);
 				keywords.add(k);
-			}*/
+			}
 			
 			tree.setPostOrderScore();
 			tree.eularPrintTree();
 			
 			
 			
-		}
-	private static void crawlSubpages(WebNode parentNode) {
-        try {
-            String url = parentNode.webPage.url;
-            HashMap<String, String> subpages = new webCrawler.GoogleQuery(url).query();
-
-            // Create WebNode for each subpage and add to the children list of parentNode
-            for (Map.Entry<String, String> entry : subpages.entrySet()) {
-                String subpageTitle = entry.getKey();
-                String subpageUrl = entry.getValue();
-
-                WebPage subpage = new WebPage(subpageUrl, subpageTitle);
-                WebNode subpageNode = new WebNode(subpage);
-                parentNode.addChild(subpageNode);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
+		}*/
 	
 	
 //	static {

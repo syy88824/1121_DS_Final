@@ -23,9 +23,6 @@ public class WebPage {
 			k.setCount(counter.countKeyword(k.name));
 			score += k.weight * k.count;
 		}
-<<<<<<< Updated upstream
-=======
 		System.out.println("webPage score = " + score);
->>>>>>> Stashed changes
 	}	
 }
