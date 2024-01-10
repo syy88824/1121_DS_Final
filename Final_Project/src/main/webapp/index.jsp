@@ -236,6 +236,7 @@ function click80() {
 }
 </script>
 </head>
+<<<<<<< Updated upstream
 <body style='background-color:#0489B1'>
 <form action='${requestUri}' method='get'>
 
@@ -282,6 +283,21 @@ margin-left:368px '/>
 <a href ='http://localhost:8080/Final_Project/TestProject'><img src="images/band-2.png" style='position:absolute;width:350px;height:150px;left:50%;top:50%;margin-top:-265px;
 margin-left:-175px '></a>
 </div>
+=======
+<body>
+     <form action='Servlet' method='get'>
+        <div id="mainContainer">
+            <p id="title">Seeries</p>
+        </div>
+        <div id="searchContainer">
+            <div id="inputContainer">
+                <input type='text' id="inputSearch" name='inputSearch' placeholder='Enter the keyword'/>
+            </div>
+            <div id="buttonContainer">
+                <button id="searchButton" type="submit"></button>
+            </div>
+        </div>
+>>>>>>> Stashed changes
 </form>
 </body>
 </html>

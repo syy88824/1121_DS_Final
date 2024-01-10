@@ -25,7 +25,13 @@ public class WebNode {
 		//nodeScore += all children's nodeScore 
 		for(WebNode child : children){
 			nodeScore += child.nodeScore;
+<<<<<<< Updated upstream
 		}		
+=======
+			System.out.println("node score = " + nodeScore + "   child.nodeScore = " + child.nodeScore);
+		}	
+		
+>>>>>>> Stashed changes
 	}
 	
 	public void addChild(WebNode child){

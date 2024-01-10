@@ -1,7 +1,12 @@
 package webScore;
 
 import java.io.IOException;
+<<<<<<< Updated upstream
 import java.util.ArrayList;
+=======
+import quickSort.Keyweb;
+import quickSort.KeywebList;
+>>>>>>> Stashed changes
 
 public class WebTree {
 	public WebNode root;
@@ -40,7 +45,7 @@ public class WebTree {
 		rootList.output();
 	}
 	
-	private void eularPrintTree(WebNode startNode){
+	/*private void eularPrintTree(WebNode startNode){
 		int nodeDepth = startNode.getDepth();
 		
 		if(nodeDepth > 1) System.out.print("\n" + repeat("\t", nodeDepth-1));
@@ -65,5 +70,5 @@ public class WebTree {
 			retVal += str;
 		}
 		return retVal;
-	}
+	}*/
 }
